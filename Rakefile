@@ -28,9 +28,10 @@ task :build => :unittest do
 end
 
 RSpec::Core::RakeTask.new(:spec) do |t|
+  puts "\nRake: Verifying specifications ...".colorize(:cyan)
   t.pattern = Dir.glob("specs/**/*.rb")
   t.rspec_opts = "--format documentation"
 end
-task :spec => :docker
+task :spec => :build
 
 CLEAN << "bin"
