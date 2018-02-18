@@ -3,4 +3,5 @@ source 'https://rubygems.org' do
   gem 'rspec'
   gem 'httpclient'
   gem 'docker-api'
+  gem 'colorize'
 end
