@@ -22,6 +22,6 @@ after_success:
   - if [ $TRAVIS_TAG ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push $TRAVIS_REPO_SLUG;
-    docker tag $TRAVIS_REPO_SLUG $TRAVIS_REPO_SLUG:$TRAVIS_TAG;
-    docker push $TRAVIS_REPO_SLUG:$TRAVIS_TAG;
+    docker tag $TRAVIS_REPO_SLUG $TRAVIS_REPO_SLUG:${TRAVIS_TAG:1};
+    docker push $TRAVIS_REPO_SLUG:${TRAVIS_TAG:1};
     fi
