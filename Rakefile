@@ -4,7 +4,7 @@ require "rspec/core/rake_task"
 
 serviceName = "carpark"
 
-task default: %w[build]
+task default: %w[spec]
 
 desc 'Run the unit tests'
 task :unittest do
@@ -16,7 +16,7 @@ desc 'Build a local docker image'
 task :build => :unittest do
   puts "\nRake: Getting version ...".colorize(:cyan)
   semver = `curl -sL https://gist.githubusercontent.com/nicklanng/4e54bf35c13bf220408875dd059cad25/raw/44d53f8c1e58a2f73dcdb6eab36f0f6cefb6acc6/semver.sh | bash`.strip
-  puts "Rake: Version is #{semver}".colorize(:green)
+  puts "Version is #{semver}".colorize(:green)
 
   puts "\nRake: Building Linux AMD64 ...".colorize(:cyan)
   ENV['GOOS'] = 'linux'
