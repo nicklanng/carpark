@@ -41,6 +41,8 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
+    puts "\n"
+    puts carparkContainer.streaming_logs(stdout: true, stderr: true)
     carparkContainer.stop
     postgresContainer.stop
   end
