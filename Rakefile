@@ -24,7 +24,7 @@ task :build do
   sh "go build -ldflags '-X main.version=#{semver}' -o bin/#{serviceName}-$GOOS-$GOARCH main.go"
 
   puts "\nRake: Building Docker image ...".colorize(:cyan)
-  sh "docker build -t nicklanng/#{serviceName}:dev ."
+  sh "docker build -t nicklanng/#{serviceName} ."
 end
 
 RSpec::Core::RakeTask.new(:spec) do |t|
