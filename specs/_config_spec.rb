@@ -50,7 +50,7 @@ end
 
 def create_carpark(postgresName)
   return Docker::Container.create(
-    "Image" => "nicklanng/carpark",
+    "Image" => "nicklanng/carpark:dev",
     "Env" => [
       "DB_USER=postgres",
       "DB_PASSWORD=postgres",
