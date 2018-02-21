@@ -6,6 +6,16 @@ serviceName = "carpark"
 
 task default: %w[all]
 
+desc 'Download required tools'
+task :install do
+ sh("go get -u github.com/jteeuwen/go-bindata/...")
+end
+
+desc 'Create generated code'
+task :codegen do
+ sh("cd data/migrations && go-bindata -ignore=bindata.go -pkg migrations ./...")
+end
+
 desc 'Run the unit tests'
 task :unittest do
   puts "\nRake: Unit tests ...".colorize(:cyan)
@@ -35,6 +45,6 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 task :spec
 
-task :all => [:unittest, :build, :spec]
+task :all => [:codegen, :unittest, :build, :spec]
 
 CLEAN << "bin"

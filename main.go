@@ -3,12 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"syscall"
 	"time"
 
 	"github.com/nicklanng/carpark/api"
 	"github.com/nicklanng/carpark/config"
 	"github.com/nicklanng/carpark/data"
+	"github.com/nicklanng/carpark/data/migrations"
 	"github.com/nicklanng/carpark/logging"
 	"github.com/nicklanng/carpark/metrics"
 )
@@ -47,6 +49,13 @@ func main() {
 	db, err := data.OpenConnection(conf.DatabaseUser, conf.DatabasePassword, serviceName, conf.DatabaseHost)
 	if err != nil {
 		logging.Fatal(err.Error())
+	}
+
+	// migrate database
+	migrationAsset := data.MakeBinDataMigration(migrations.AssetNames(), migrations.Asset)
+	err = data.PerformMigration(db, "go-bindata", migrationAsset)
+	if err != nil {
+		log.Fatal(err.Error())
 	}
 
 	// create https server
