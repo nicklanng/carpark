@@ -21,6 +21,7 @@ task :build do
   puts "\nRake: Building Linux AMD64 ...".colorize(:cyan)
   ENV['GOOS'] = 'linux'
   ENV['GOARCH'] = 'amd64'
+  ENV['CGO_ENABLED'] = '0'
   sh "go build -ldflags '-X main.version=#{semver}' -o bin/#{serviceName}-$GOOS-$GOARCH main.go"
 
   puts "\nRake: Building Docker image ...".colorize(:cyan)
