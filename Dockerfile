@@ -1,4 +1,4 @@
-FROM scratch
+FROM alpine:3.6
 
 EXPOSE 8443/tcp
 
