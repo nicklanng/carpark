@@ -18,7 +18,7 @@ func OpenConnection(user, password, database, host string) (*sql.DB, error) {
 	}
 
 	db.SetMaxOpenConns(10)
-	db.SetMaxIdleConns(0)
+	db.SetMaxIdleConns(4)
 	db.SetConnMaxLifetime(1 * time.Minute)
 
 	if err = db.Ping(); err != nil {
