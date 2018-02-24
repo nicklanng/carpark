@@ -17,14 +17,22 @@ RSpec.configure do |config|
     sleep 10
 
     # create DATABASE
-    conn = PG.connect(
+    $pg = PG.connect(
       :host => 'localhost',
       :port => postgresPort,
       :dbname => 'postgres',
       :user => 'postgres',
       :password => 'postgres',
     )
-    conn.exec("CREATE DATABASE carpark")
+    $pg.exec("CREATE DATABASE carpark")
+    $pg.close()
+    $pg = PG.connect(
+      :host => 'localhost',
+      :port => postgresPort,
+      :dbname => 'carpark',
+      :user => 'postgres',
+      :password => 'postgres',
+    )
 
     # start carpark server
     carparkContainer = create_carpark(postgresName)

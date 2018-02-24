@@ -11,6 +11,7 @@ import (
 	"github.com/nicklanng/carpark/config"
 	"github.com/nicklanng/carpark/data"
 	"github.com/nicklanng/carpark/data/migrations"
+	"github.com/nicklanng/carpark/events"
 	"github.com/nicklanng/carpark/logging"
 	"github.com/nicklanng/carpark/metrics"
 )
@@ -58,9 +59,12 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	// event dispatcher
+	eventChan := events.NewDispatcher(db)
+
 	// create https server
 	addr := fmt.Sprintf("%s:%s", conf.Address, conf.Port)
-	routes := api.BuildRoutes(db)
+	routes := api.BuildRoutes(eventChan)
 	server := api.StartHTTPSServer(addr, conf.TLSCertPath, conf.TLSKeyPath, routes)
 
 	api.GracefulShutdownOnSignal([]syscall.Signal{syscall.SIGINT, syscall.SIGTERM}, func() {

@@ -5,4 +5,5 @@ source 'https://rubygems.org' do
   gem 'docker-api'
   gem 'colorize'
   gem 'pg'
+  gem 'google-protobuf'
 end

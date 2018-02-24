@@ -9,11 +9,12 @@ task default: %w[all]
 desc 'Download required tools'
 task :install do
  sh("go get -u github.com/jteeuwen/go-bindata/...")
+ sh("go get -u github.com/golang/protobuf/protoc-gen-go")
 end
 
 desc 'Create generated code'
 task :codegen do
- sh("cd data/migrations && go-bindata -ignore=bindata.go -pkg migrations ./...")
+ sh("go generate ./...")
 end
 
 desc 'Run the unit tests'
@@ -38,12 +39,16 @@ task :build do
   sh "docker build -t nicklanng/#{serviceName}:dev ."
 end
 
+task :rubycodegen do
+  sh("protoc -I ./events --ruby_out ./specs/support ./events/events.proto")
+end
+
 RSpec::Core::RakeTask.new(:spec) do |t|
   puts "\nRake: Verifying specifications ...".colorize(:cyan)
   t.pattern = Dir.glob("specs/**/*.rb")
   t.rspec_opts = "--format documentation"
 end
-task :spec
+task :spec => :rubycodegen
 
 task :all => [:codegen, :unittest, :build, :spec]
 

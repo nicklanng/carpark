@@ -1,0 +1,9 @@
+syntax = "proto3";
+package events;
+
+import "google/protobuf/timestamp.proto";
+
+message TicketIssued {
+  google.protobuf.Timestamp at = 1;
+  string ticketID = 2;
+}
