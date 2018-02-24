@@ -15,6 +15,7 @@ type createTicketResponse struct {
 	IssuedAt string `json:"issuedAt"`
 }
 
+// CreateTicket as an HTTP handler that sends a TicketIssued to the event dispatcher.
 func CreateTicket(eventChan chan<- events.Event) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ticketID := uuid.NewV4().String()
