@@ -14,6 +14,7 @@ end
 
 desc 'Create generated code'
 task :codegen do
+  puts "\nGenerating Go code ...".colorize(:cyan)
  sh("go generate ./...")
 end
 
@@ -40,6 +41,7 @@ task :build do
 end
 
 task :rubycodegen do
+  puts "\nGenerating Ruby code ...".colorize(:cyan)
   sh("protoc -I ./events --ruby_out ./specs/support ./events/events.proto")
 end
 
