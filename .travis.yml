@@ -7,11 +7,14 @@ go:
 
 services: docker
 
+env:
+  global:
+  - "PATH=$PATH:$HOME/local/bin"
+
 before_install:
   - ./.travis/install-protoc.sh 3.5.1
   - bundle install
   - rake install
-  -
 
 script:
   - rake
