@@ -11,6 +11,11 @@ before_install:
   - bundle install
   - rake install
 
+install:
+  - wget https://protobuf.googlecode.com/files/protobuf3.5.1.tar.gz
+  - tar -xzvf protobuf3.5.1.tar.gz
+  - pushd protobuf3.5.1 && ./configure --prefix=/usr && make && sudo make install && popd
+
 script:
   - rake
 
