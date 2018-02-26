@@ -6,13 +6,16 @@ import (
 	"time"
 )
 
+// TicketID is a type alias of a string
 type TicketID string
 
+// Ticket is an issued ticket for a car in a carpark
 type Ticket struct {
 	ID       TicketID
 	IssuedAt time.Time
 }
 
+// GetTariff gets the current price of a ticket
 func (t *Ticket) GetTariff(now time.Time) (int, error) {
 	elapsed := now.Sub(t.IssuedAt)
 

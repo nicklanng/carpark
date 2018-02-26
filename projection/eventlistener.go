@@ -10,6 +10,8 @@ import (
 	"github.com/nicklanng/carpark/logging"
 )
 
+// CreateEventListener starts a goroutine that listens for event notifications
+// from the database. It parses those events and sends them to the state to be processed.
 func CreateEventListener(state *State, eventListener *pq.Listener) {
 	go func() {
 		for {

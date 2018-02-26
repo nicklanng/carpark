@@ -9,16 +9,19 @@ import (
 
 // TODO: Need some sort of concurrency protection around the state
 
+// State is the projection of the events into the state of the application.
 type State struct {
 	tickets map[TicketID]*Ticket
 }
 
+// NewState returns a new state object to keep track of all aggregates.
 func NewState() *State {
 	state := new(State)
 	state.tickets = make(map[TicketID]*Ticket)
 	return state
 }
 
+// ProcessEvent folds the supplied event in to the current aggregates.
 func (s *State) ProcessEvent(event events.Event) error {
 	switch v := event.(type) {
 	case *events.TicketIssued:
@@ -40,6 +43,8 @@ func (s *State) ProcessEvent(event events.Event) error {
 	return nil
 }
 
+// GetTicket returns a ticket in the state.
+// The boolean returns whether the ticket was found.
 func (s *State) GetTicket(id TicketID) (*Ticket, bool) {
 	ticket, ok := s.tickets[id]
 	return ticket, ok
