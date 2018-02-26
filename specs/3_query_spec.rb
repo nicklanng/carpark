@@ -5,7 +5,7 @@ require 'google/protobuf'
 require 'securerandom'
 
 shared_examples "get tariff" do |hoursParked, expectedPrice|
-  context "Ticket issued #{hoursParked} hours ago" do
+  context "Ticket issued just under #{hoursParked} hours ago" do
     before :all do
       # create a ticket less than an hour old
       @ticketID = SecureRandom.uuid
@@ -26,7 +26,7 @@ shared_examples "get tariff" do |hoursParked, expectedPrice|
       expect(jsonResponse["id"]).to eq @ticketID
     end
 
-    it "returns a price of £#{expectedPrice/100}" do
+    it "returns a price of £#{sprintf('%.2f', expectedPrice/100.0)}" do
       jsonResponse = JSON.parse @response.body
       expect(jsonResponse["tariff"]).to eq expectedPrice
     end
