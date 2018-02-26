@@ -6,4 +6,5 @@ source 'https://rubygems.org' do
   gem 'colorize'
   gem 'pg'
   gem 'google-protobuf'
+  gem 'securerandom'
 end

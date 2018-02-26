@@ -5,7 +5,7 @@ require 'pg'
 
 RSpec.configure do |config|
   postgresContainer = nil
-  carparkContainer = nil
+  $carparkContainer = nil
 
   config.before(:suite) do
     # start postgres server
@@ -35,9 +35,9 @@ RSpec.configure do |config|
     )
 
     # start carpark server
-    carparkContainer = create_carpark(postgresName)
-    carparkContainer.start
-    port = carparkContainer.json["NetworkSettings"]["Ports"]["8443/tcp"][0]["HostPort"]
+    $carparkContainer = create_carpark(postgresName)
+    $carparkContainer.start
+    port = $carparkContainer.json["NetworkSettings"]["Ports"]["8443/tcp"][0]["HostPort"]
     $endpoint = "https://127.0.0.1:#{port}"
 
     # create http client
@@ -49,9 +49,7 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    puts "\n"
-    puts carparkContainer.streaming_logs(stdout: true, stderr: true)
-    carparkContainer.stop
+    $carparkContainer.stop
     postgresContainer.stop
   end
 end

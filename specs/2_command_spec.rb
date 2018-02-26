@@ -10,6 +10,10 @@ describe "POST /ticket :: Issue a new ticket" do
     sleep 1
   end
 
+  after :all do
+    $pg.exec("TRUNCATE events")
+  end
+
   it "returns 200 OK" do
     expect(@response.status).to eq 200
   end

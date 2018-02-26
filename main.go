@@ -14,6 +14,7 @@ import (
 	"github.com/nicklanng/carpark/events"
 	"github.com/nicklanng/carpark/logging"
 	"github.com/nicklanng/carpark/metrics"
+	"github.com/nicklanng/carpark/projection"
 )
 
 const (
@@ -47,7 +48,7 @@ func main() {
 	metrics.Initialize(conf.StatsdEndpoint, serviceName)
 
 	// connect to database
-	db, err := data.OpenConnection(conf.DatabaseUser, conf.DatabasePassword, serviceName, conf.DatabaseHost)
+	db, eventListener, err := data.OpenConnection(conf.DatabaseUser, conf.DatabasePassword, serviceName, conf.DatabaseHost)
 	if err != nil {
 		logging.Fatal(err.Error())
 	}
@@ -62,13 +63,20 @@ func main() {
 	// event dispatcher
 	eventChan := events.NewDispatcher(db)
 
+	// create state in memory
+	state := projection.NewState()
+
+	// listen to notifications from database and process event
+	projection.CreateEventListener(state, eventListener)
+
 	// create https server
 	addr := fmt.Sprintf("%s:%s", conf.Address, conf.Port)
-	routes := api.BuildRoutes(eventChan)
+	routes := api.BuildRoutes(state, eventChan)
 	server := api.StartHTTPSServer(addr, conf.TLSCertPath, conf.TLSKeyPath, routes)
 
 	api.GracefulShutdownOnSignal([]syscall.Signal{syscall.SIGINT, syscall.SIGTERM}, func() {
 		api.ShutdownHTTPServer(server, serverGracePeriod)
 		db.Close()
+		eventListener.Close()
 	})
 }

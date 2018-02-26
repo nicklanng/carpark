@@ -2,6 +2,8 @@
 // sources:
 // 001_create_events_table.down.sql
 // 001_create_events_table.up.sql
+// 002_events_pubsub.down.sql
+// 002_events_pubsub.up.sql
 // DO NOT EDIT!
 
 package migrations
@@ -109,6 +111,46 @@ func _001_create_events_tableUpSql() (*asset, error) {
 	return a, nil
 }
 
+var __002_events_pubsubDownSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x72\x09\xf2\x0f\x50\x08\x09\xf2\x74\x77\x77\x0d\x52\xf0\x74\x53\x70\x8d\xf0\x0c\x0e\x09\x56\x48\x2d\x4b\xcd\x2b\x89\xcf\xcc\x2b\x4e\x2d\x2a\x51\xf0\xf7\x83\xf0\x8b\x15\x9c\x1d\x83\x9d\x1d\x5d\x5c\xad\xb9\xb8\xc0\xfa\xdc\x42\xfd\x9c\x43\x3c\xfd\xfd\x90\x34\xe6\xa5\x96\xc7\x43\x34\xe7\xe5\x97\x64\xa6\x55\x5a\x73\x01\x02\x00\x00\xff\xff\x91\x55\x41\x5e\x62\x00\x00\x00")
+
+func _002_events_pubsubDownSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__002_events_pubsubDownSql,
+		"002_events_pubsub.down.sql",
+	)
+}
+
+func _002_events_pubsubDownSql() (*asset, error) {
+	bytes, err := _002_events_pubsubDownSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "002_events_pubsub.down.sql", size: 98, mode: os.FileMode(420), modTime: time.Unix(1519592807, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var __002_events_pubsubUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x74\x90\xcd\x6a\xfa\x40\x14\xc5\xf7\xf3\x14\x67\x11\x18\x05\xf9\x3f\x80\xe1\xbf\x98\x8e\x37\x69\xc0\xce\xc8\xcd\x04\xbb\x93\xa9\x4e\x55\x90\x18\xcd\x60\x0d\xf8\xf0\xc5\xaf\x40\xa1\x5d\x5d\x2e\xe7\xdc\x8f\xf3\xd3\x4c\xca\x11\x2c\x83\x69\x36\x55\x9a\x90\x55\x46\xbb\xc2\x1a\xd4\xe1\x6b\x11\x4e\xa1\x8e\x8b\x7a\x1f\xb7\x9f\xdd\x60\x08\x26\x57\xb1\x29\xe1\xb8\xc8\x73\x62\xa8\x12\x49\x22\x80\x09\xe9\xa9\x62\x12\x00\xd0\xf8\x6e\xb7\xf7\x2b\x9c\xfc\x71\xb9\xf1\xc7\x54\x00\x2f\x94\x17\xe6\x87\x38\xfe\x0f\xad\x4a\x37\x30\x34\xff\xd7\x86\xc3\x75\x51\x0c\xe7\x38\xc4\xe5\x02\x39\x92\xd7\xd2\xeb\xb1\x6b\xc2\x9f\x86\x50\x2f\xf7\xab\x70\xf3\xad\x7c\xf4\xe3\xf1\x47\x17\x83\x1f\x41\x6e\xc2\x59\x0e\xfb\xb1\xf4\x76\x7d\x46\x9c\x59\x7e\x43\xb3\x7e\x46\x92\x7d\x48\x39\x7a\x3e\xf7\x30\xdf\xb3\xc2\xd0\xfc\xda\x93\x99\xa4\x22\x49\x30\x55\x26\xaf\x54\x4e\x68\x76\xcd\xba\x3d\xec\x52\x21\x1e\x08\x9f\x4c\xee\xc8\xb6\x75\x1b\x8e\x11\x2a\x73\xc4\x28\x4c\x49\xec\x60\xcd\x5d\x6c\x45\x66\x19\xa4\xf4\x2b\xd8\xce\x41\xef\xa4\x2b\x47\x98\xb1\xd5\x34\xa9\x98\x7e\x21\x9f\x8a\xef\x00\x00\x00\xff\xff\x63\xdd\xac\x04\xa9\x01\x00\x00")
+
+func _002_events_pubsubUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__002_events_pubsubUpSql,
+		"002_events_pubsub.up.sql",
+	)
+}
+
+func _002_events_pubsubUpSql() (*asset, error) {
+	bytes, err := _002_events_pubsubUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "002_events_pubsub.up.sql", size: 425, mode: os.FileMode(420), modTime: time.Unix(1519634106, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 // Asset loads and returns the asset for the given name.
 // It returns an error if the asset could not be found or
 // could not be loaded.
@@ -163,6 +205,8 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){
 	"001_create_events_table.down.sql": _001_create_events_tableDownSql,
 	"001_create_events_table.up.sql": _001_create_events_tableUpSql,
+	"002_events_pubsub.down.sql": _002_events_pubsubDownSql,
+	"002_events_pubsub.up.sql": _002_events_pubsubUpSql,
 }
 
 // AssetDir returns the file names below a certain
@@ -207,6 +251,8 @@ type bintree struct {
 var _bintree = &bintree{nil, map[string]*bintree{
 	"001_create_events_table.down.sql": &bintree{_001_create_events_tableDownSql, map[string]*bintree{}},
 	"001_create_events_table.up.sql": &bintree{_001_create_events_tableUpSql, map[string]*bintree{}},
+	"002_events_pubsub.down.sql": &bintree{_002_events_pubsubDownSql, map[string]*bintree{}},
+	"002_events_pubsub.up.sql": &bintree{_002_events_pubsubUpSql, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory

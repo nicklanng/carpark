@@ -33,7 +33,20 @@ func PerformMigration(database *sql.DB, sourceType string, s *bindata.AssetSourc
 		return err
 	}
 
-	// get version of schema currently in the database
+	if err := logDatabaseVersion(migration); err != nil {
+		return err
+	}
+
+	migration.Up()
+
+	if err := logDatabaseVersion(migration); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func logDatabaseVersion(migration *migrate.Migrate) error {
 	currentVersion, dirty, err := migration.Version()
 	if err != nil {
 		switch err.Error() {
@@ -48,31 +61,6 @@ func PerformMigration(database *sql.DB, sourceType string, s *bindata.AssetSourc
 
 	if dirty {
 		return errors.New("Dirty schema - please manually fix")
-	}
-
-	for {
-		// find the next available version in the code
-		nextVersion, err := sourceDriver.First()
-		if err != nil {
-			return err
-		}
-
-		// if no update required, break out
-		if currentVersion == nextVersion {
-			logging.Info("Schema up-to-date")
-			break
-		}
-
-		logging.Info(fmt.Sprintf("Found schema migration %d", nextVersion))
-
-		// apply next migration
-		err = migration.Steps(int(nextVersion))
-		if err != nil {
-			return err
-		}
-		logging.Info(fmt.Sprintf("Applied schema migration %d", nextVersion))
-
-		currentVersion = nextVersion
 	}
 
 	return nil

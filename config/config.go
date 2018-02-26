@@ -11,8 +11,8 @@ type Config struct {
 	TLSCertPath      string `env:"CERT_PATH" default:"server.crt"`
 	TLSKeyPath       string `env:"KEY_PATH" default:"server.key"`
 	StatsdEndpoint   string `env:"STATSD_ENDPOINT" required:"false"`
-	DatabaseUser     string `env:"DB_USER" required:"false"`
-	DatabasePassword string `env:"DB_PASSWORD" required:"false"`
+	DatabaseUser     string `env:"DB_USER" default:"postgres"`
+	DatabasePassword string `env:"DB_PASSWORD" default:"postgres"`
 	DatabaseHost     string `env:"DB_HOST" default:"localhost"`
 }
 
