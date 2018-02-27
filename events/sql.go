@@ -20,7 +20,7 @@ var (
 
 // insertEvent will attempt to append an event to the end of the log.
 // Seq should be the last seq + 1. This allows the caller to check that another event which is incompatible with another that has been inserted before.
-func insertEvent(db *sql.DB, seq int64, event Event) error {
+func insertEvent(db *sql.DB, event Event) error {
 	eventType := EventType(event)
 
 	data, err := proto.Marshal(event)
@@ -28,7 +28,7 @@ func insertEvent(db *sql.DB, seq int64, event Event) error {
 		return err
 	}
 
-	if _, err := db.Exec("INSERT INTO events (seq, type, data) VALUES ($1,$2,$3)", seq, eventType, data); err != nil {
+	if _, err := db.Exec("INSERT INTO events (type, data) VALUES ($1,$2)", eventType, data); err != nil {
 		pqErr := err.(*pq.Error)
 		switch pqErr.Code {
 		case PqUniqueViolation:

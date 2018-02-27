@@ -7,11 +7,7 @@ describe "POST /ticket :: Issue a new ticket" do
   before :all do
     @requestSent = Time.now.to_i
     @response = $client.post "#{$endpoint}/ticket"
-    sleep 1
-  end
-
-  after :all do
-    $pg.exec("TRUNCATE events")
+    sleep 5
   end
 
   it "returns 200 OK" do
@@ -27,14 +23,14 @@ describe "POST /ticket :: Issue a new ticket" do
   it "returns the time the ticket was issued" do
     jsonResponse = JSON.parse @response.body
     timeDelta = Time.parse(jsonResponse["issuedAt"]).to_i - @requestSent
-    expect(timeDelta.abs).to be < 5
+    expect(timeDelta.abs).to be < 10
   end
 
   it "persists event to database" do
-    rs = $pg.exec 'SELECT * FROM events WHERE seq = 0'
+    rs = $pg.exec 'SELECT * FROM events WHERE seq = 1'
 
     seq = rs.getvalue 0, 0
-    expect(seq).to eq "0"
+    expect(seq).to eq "1"
 
     eventType = rs.getvalue 0, 1
     expect(eventType).to eq "TicketIssued"
@@ -47,6 +43,6 @@ describe "POST /ticket :: Issue a new ticket" do
     expect(event.ticketID).to eq jsonResponse["id"]
 
     timeDelta = event.at.seconds - @requestSent
-    expect(timeDelta.abs).to be < 5
+    expect(timeDelta.abs).to be < 10
   end
 end

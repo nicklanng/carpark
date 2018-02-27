@@ -60,6 +60,8 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	// TODO: Read in all events from DB
+
 	// event dispatcher
 	eventChan := events.NewDispatcher(db)
 

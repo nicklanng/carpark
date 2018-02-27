@@ -35,10 +35,6 @@ end
 
 
 describe "GET /ticket/{id}/tariff :: Get the current price of the ticket" do
-  after :all do
-    $pg.exec("TRUNCATE events")
-  end
-
   context "Unknown ticket" do
     before :all do
       lessThanHourTicketID = 'unknown-ticket'

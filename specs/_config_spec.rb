@@ -50,7 +50,7 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     $carparkContainer.stop
-    postgresContainer.stop
+    # postgresContainer.stop
   end
 end
 

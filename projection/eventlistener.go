@@ -39,8 +39,22 @@ func CreateEventListener(state *State, eventListener *pq.Listener) {
 					return
 				}
 				state.ProcessEvent(event)
+			case "TicketPaid":
+				event := &events.TicketPaid{}
+				if err := proto.Unmarshal(eventBytes, event); err != nil {
+					logging.Error("Error unmarshalling bytes to event: " + err.Error())
+					return
+				}
+				state.ProcessEvent(event)
+			case "TicketComplete":
+				event := &events.TicketComplete{}
+				if err := proto.Unmarshal(eventBytes, event); err != nil {
+					logging.Error("Error unmarshalling bytes to event: " + err.Error())
+					return
+				}
+				state.ProcessEvent(event)
 			default:
-				logging.Warn("Unknown error type")
+				logging.Warn("Unknown event type")
 				return
 			}
 

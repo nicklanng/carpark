@@ -7,3 +7,13 @@ message TicketIssued {
   google.protobuf.Timestamp at = 1;
   string ticketID = 2;
 }
+
+message TicketPaid {
+  google.protobuf.Timestamp at = 1;
+  string ticketID = 2;
+}
+
+message TicketComplete {
+  google.protobuf.Timestamp at = 1;
+  string ticketID = 2;
+}

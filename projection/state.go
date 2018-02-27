@@ -33,11 +33,25 @@ func (s *State) ProcessEvent(event events.Event) error {
 
 		t := &Ticket{
 			ID:       TicketID(v.GetTicketID()),
+			Status:   TicketStatusIssued,
 			IssuedAt: issuedAt,
 		}
 		if err := s.createTicket(t); err != nil {
 			return err
 		}
+
+	case *events.TicketPaid:
+		ticketID := TicketID(v.GetTicketID())
+		ticket, ok := s.GetTicket(ticketID)
+		if !ok {
+			return nil
+		}
+
+		ticket.Status = TicketStatusPaid
+
+	case *events.TicketComplete:
+		ticketID := TicketID(v.GetTicketID())
+		s.removeTicket(ticketID)
 	}
 
 	return nil
@@ -58,4 +72,8 @@ func (s *State) createTicket(t *Ticket) error {
 	s.tickets[t.ID] = t
 
 	return nil
+}
+
+func (s *State) removeTicket(id TicketID) {
+	delete(s.tickets, id)
 }

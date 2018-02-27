@@ -18,6 +18,8 @@ func BuildRoutes(state *projection.State, eventChan chan<- events.Event) *mux.Ro
 
 	// commands
 	r.Handle("/ticket", commands.CreateTicket(eventChan)).Methods("POST")
+	r.Handle("/ticket/{ID}/pay", commands.PayForTicket(eventChan, state)).Methods("POST")
+	r.Handle("/ticket/{ID}/complete", commands.CompleteTicket(eventChan, state)).Methods("POST")
 
 	// queries
 	r.Handle("/ticket/{ID}/tariff", queries.GetTicketTariff(state)).Methods("GET")
