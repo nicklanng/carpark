@@ -12,7 +12,7 @@ func CountHTTPRequest(request *http.Request) {
 	}
 
 	statsdTags := []StatsdTag{
-		StatsdTag{Key: "method", Value: request.Method},
+		{Key: "method", Value: request.Method},
 	}
 	Counter(requestMetric, 1, statsdTags...)
 }
@@ -24,7 +24,7 @@ func CountHTTPResponse(response *http.Response) {
 	}
 
 	statsdTags := []StatsdTag{
-		StatsdTag{Key: "statuscode", Value: strconv.Itoa(response.StatusCode)},
+		{Key: "statuscode", Value: strconv.Itoa(response.StatusCode)},
 	}
 	Counter(responseMetric, 1, statsdTags...)
 }

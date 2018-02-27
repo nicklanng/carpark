@@ -16,6 +16,7 @@ type Config struct {
 	DatabaseHost     string `env:"DB_HOST" default:"localhost"`
 }
 
+// Load returns a new config struct containing settings gathered from env vars.
 func Load() (config *Config, err error) {
 	config = &Config{}
 

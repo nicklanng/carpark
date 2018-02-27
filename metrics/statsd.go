@@ -53,10 +53,11 @@ func Initialize(addr, prefix string) {
 	client.session = session
 
 	defaultTags = []StatsdTag{
-		StatsdTag{Key: "host", Value: hostname},
+		{Key: "host", Value: hostname},
 	}
 }
 
+// Counter is a standard StatsD metric type
 func Counter(bucket string, value int, tags ...StatsdTag) {
 	if client == nil {
 		return
@@ -64,6 +65,7 @@ func Counter(bucket string, value int, tags ...StatsdTag) {
 	client.session.Counter(1, buildMetricName(bucket, tags), value)
 }
 
+// Timing is a standard StatsD metric type
 func Timing(bucket string, duration time.Duration, tags ...StatsdTag) {
 	if client == nil {
 		return
@@ -71,6 +73,7 @@ func Timing(bucket string, duration time.Duration, tags ...StatsdTag) {
 	client.session.Timing(1, buildMetricName(bucket, tags), duration)
 }
 
+// Gauge is a standard StatsD metric type
 func Gauge(bucket string, value float64, tags ...StatsdTag) {
 	if client == nil {
 		return
