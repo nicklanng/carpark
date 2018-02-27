@@ -2,6 +2,7 @@
 An HTTP API for paying for parking.
 
 [![Build Status](https://travis-ci.org/nicklanng/carpark.svg?branch=master)](https://travis-ci.org/nicklanng/carpark)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nicklanng/carpark)](https://goreportcard.com/report/github.com/nicklanng/carpark)
 
 ## Setup
 This application is written in Go and tested with Ruby and RSpec. The tests run against docker containers.
