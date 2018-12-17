@@ -3,97 +3,140 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:6c1786871da6efec6cfe753625418d576a8cc5a8acbf3ddc60e066ef9570ea7c"
   name = "github.com/codingconcepts/env"
   packages = ["."]
+  pruneopts = "UT"
   revision = "31f8d99d7765666589f9b44db294011c1d95aed3"
 
 [[projects]]
+  digest = "1:3a5d58419415e32541eeb1812c8587c27d51c115e011c59edcecc6093d515476"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
+    "protoc-gen-go",
+    "protoc-gen-go/descriptor",
+    "protoc-gen-go/generator",
+    "protoc-gen-go/grpc",
+    "protoc-gen-go/plugin",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
-    "ptypes/timestamp"
+    "ptypes/timestamp",
   ]
+  pruneopts = "UT"
   revision = "925541529c1fa6821df4e44ce2723319eb2be768"
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:160eabf7a69910fd74f29c692718bc2437c1c1c7d4c9dea9712357752a70e5df"
   name = "github.com/gorilla/context"
   packages = ["."]
+  pruneopts = "UT"
   revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
   version = "v1.1"
 
 [[projects]]
+  digest = "1:88aa9e326e2bd6045a46e00a922954b3e1a9ac5787109f49ac85366df370e1e5"
   name = "github.com/gorilla/mux"
   packages = ["."]
+  pruneopts = "UT"
   revision = "53c1911da2b537f792e7cafcb446b05ffe33b996"
   version = "v1.6.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:bd26bbaf1e9f9dfe829a88f87a0849b56f717c31785443a67668f2c752fa8412"
   name = "github.com/lib/pq"
   packages = [
     ".",
-    "oid"
+    "oid",
   ]
+  pruneopts = "UT"
   revision = "88edab0803230a3898347e77b474f8c1820a1f20"
 
 [[projects]]
+  digest = "1:676d99cd3b486a73ace75e2b74a86f364677118d9c167b9f7d79519224df6f56"
   name = "github.com/mattes/migrate"
   packages = [
     ".",
     "database",
     "database/postgres",
     "source",
-    "source/go-bindata"
+    "source/go-bindata",
   ]
+  pruneopts = "UT"
   revision = "035c07716cd373d88456ec4d701402df52584cb4"
   version = "v3.0.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:e252f2808619b073723070ee72bbdf82d25ded8f5fcc72d4acb22901367e3e29"
   name = "github.com/peterbourgon/g2s"
   packages = ["."]
+  pruneopts = "UT"
   revision = "d4e7ad98afea530d947adb4490aa062353856767"
 
 [[projects]]
+  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
   name = "github.com/pkg/errors"
   packages = ["."]
+  pruneopts = "UT"
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
 
 [[projects]]
+  digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
   name = "github.com/satori/go.uuid"
   packages = ["."]
+  pruneopts = "UT"
   revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
   version = "v1.2.0"
 
 [[projects]]
+  digest = "1:5622116f2c79239f2d25d47b881e14f96a8b8c17b63b8a8326a38ee1a332b007"
   name = "github.com/sirupsen/logrus"
   packages = ["."]
+  pruneopts = "UT"
   revision = "d682213848ed68c0a260ca37d6dd5ace8423f5ba"
   version = "v1.0.4"
 
 [[projects]]
   branch = "master"
+  digest = "1:38cb27d3525635c34e84e2dbc2207c37d10832776997665bf0ddaeae2c861f1f"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
+  pruneopts = "UT"
   revision = "432090b8f568c018896cd8a0fb0345872bbac6ce"
 
 [[projects]]
   branch = "master"
+  digest = "1:c13f38cb4c5758bbc084ff39e191a1fe2ca2d8ee645500a179e89bd83494f2e1"
   name = "golang.org/x/sys"
   packages = [
     "unix",
-    "windows"
+    "windows",
   ]
+  pruneopts = "UT"
   revision = "37707fdb30a5b38865cfb95e5aab41707daec7fd"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8f0ba7e69e2fa717648907cc5a16b23d8d69d797f22f1c80f88aec268d799823"
+  input-imports = [
+    "github.com/codingconcepts/env",
+    "github.com/golang/protobuf/proto",
+    "github.com/golang/protobuf/protoc-gen-go",
+    "github.com/golang/protobuf/ptypes",
+    "github.com/golang/protobuf/ptypes/timestamp",
+    "github.com/gorilla/mux",
+    "github.com/lib/pq",
+    "github.com/mattes/migrate",
+    "github.com/mattes/migrate/database/postgres",
+    "github.com/mattes/migrate/source/go-bindata",
+    "github.com/peterbourgon/g2s",
+    "github.com/satori/go.uuid",
+    "github.com/sirupsen/logrus",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

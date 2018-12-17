@@ -9,7 +9,7 @@ task default: %w[all]
 desc 'Download required tools'
 task :install do
  sh("go get -u github.com/jteeuwen/go-bindata/...")
- sh("go get -u github.com/golang/protobuf/protoc-gen-go")
+ sh("go install ./vendor/github.com/golang/protobuf/protoc-gen-go")
  sh("go get -u -a golang.org/x/tools/cmd/stringer")
 end
 
