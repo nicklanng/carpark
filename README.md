@@ -1,6 +1,9 @@
 # carpark
 An HTTP API for paying for parking.
 
+An experiment into event sourcing backed by a Postgres database. Events are stored in serialised protobuf and state is held in memory.
+Also includes examples of logging, metrics and "black-box" service level specifications.
+
 [![Build Status](https://travis-ci.org/nicklanng/carpark.svg?branch=master)](https://travis-ci.org/nicklanng/carpark)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nicklanng/carpark)](https://goreportcard.com/report/github.com/nicklanng/carpark)
 
